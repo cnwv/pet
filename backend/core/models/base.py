@@ -14,6 +14,4 @@ class Base(DeclarativeBase):
 
     @declared_attr.directive
     def __tablename__(cls) -> str:
-        return f"{...}" # TODO: Add rule for table name
-
-    
+        return f"{camel_case_to_snake_case(cls.__name__)}s"
