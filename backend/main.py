@@ -20,3 +20,4 @@ if __name__ == "__main__":
         port=settings.run.port,
         reload=True,
     )
+# uvicorn main:main_app --host 127.0.0.1 --port 8000
