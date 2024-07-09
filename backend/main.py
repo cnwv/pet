@@ -5,6 +5,7 @@ from core.config import settings
 from api import router as api_router
 from create_fastapi_app import create_app
 
+# some comment
 main_app = create_app(
     create_custom_static_urls=True,
 )
