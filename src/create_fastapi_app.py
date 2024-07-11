@@ -47,17 +47,12 @@ def register_static_docs_routes(app: FastAPI):
 def create_app(
         create_custom_static_urls: bool = False,
 ) -> FastAPI:
-
     app = FastAPI(
         default_response_class=ORJSONResponse,
         lifespan=lifespan,
         docs_url=None if create_custom_static_urls else "/docs",
         redoc_url=None if create_custom_static_urls else "/redoc",
     )
-
-    @app.get("/", response_class=PlainTextResponse)
-    async def root():
-        return "Timeweb Cloud + FastAPI"
 
     if create_custom_static_urls:
         register_static_docs_routes(app)
