@@ -9,7 +9,6 @@ from pydantic_settings import (
 class RunConfig(BaseModel):
     host: str = "0.0.0.0"
     port: int = 8000
-    env_variable: str = '12'
 
 
 class ApiV1Prefix(BaseModel):
