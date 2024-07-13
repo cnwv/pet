@@ -14,9 +14,11 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
 asyncpg = "^0.29.0"
 uvicorn = {extras = ["standart"], version = "^0.30.1"}
 pydantic-settings = "^2.3.4"
+aiobotocore = "^2.13.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
+black = "^24.4.2"
 
 [build-system]
 requires = ["poetry-core"]
