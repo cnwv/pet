@@ -16,6 +16,7 @@ uvicorn = {extras = ["standart"], version = "^0.30.1"}
 pydantic-settings = "^2.3.4"
 aiobotocore = "^2.13.1"
 pyjwt = {extras = ["crypto"], version = "^2.8.0"}
+python-multipart = "^0.0.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
