@@ -20,7 +20,7 @@ api_router = APIRouter(prefix="/auth-v2", tags=["fastapi_users"])
 def get_jwt_strategy() -> JWTStrategy:
     return JWTStrategy(
         secret=settings.auth_jwt.private_key_path.read_text(),
-        lifetime_seconds=3600,
+        lifetime_seconds=3600 * 24 * 7,
         algorithm="RS256",
         public_key=settings.auth_jwt.public_key_path.read_text(),
     )
@@ -36,8 +36,3 @@ fastapi_users = FastAPIUsers[User, uuid.UUID](
     get_user_manager,
     [auth_backend],
 )
-
-
-@api_router.get("")
-def get():
-    return 200
