@@ -1,5 +1,7 @@
 from typing import AsyncGenerator
 
+from fastapi import Depends
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import (
     create_async_engine,
     AsyncEngine,
@@ -8,6 +10,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from core.config import settings
+from core.models.user import User
 
 
 class DatabaseHelper:
@@ -48,3 +51,7 @@ db_helper = DatabaseHelper(
     pool_size=settings.db.pool_size,
     max_overflow=settings.db.max_overflow,
 )
+
+
+async def get_user_db(session: AsyncSession = Depends(db_helper.session_getter)):
+    yield SQLAlchemyUserDatabase(session, User)

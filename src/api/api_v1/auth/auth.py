@@ -32,7 +32,7 @@ class TokenInfo(BaseModel):
 
 
 def validate_auth_user(
-    username: str = Form(..., json_schema_extra={"example": "admin"}),
+    username: str = Form(json_schema_extra={"example": "admin"}),
     password: str = Form(json_schema_extra={"example": "admin"}),
 ):
     unauthed_exception = HTTPException(

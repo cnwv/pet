@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
 from starlette import status
 
-from api.api_v1.auth import (
+from api.api_v1.auth.helpers import (
     TOKEN_TYPE_FIELD,
     ACCESS_TOKEN_TYPE,
     REFRESH_TOKEN_TYPE,
