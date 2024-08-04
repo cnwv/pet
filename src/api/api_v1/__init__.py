@@ -2,8 +2,8 @@ from fastapi import APIRouter
 
 from .films import router as films_router
 from core.config import settings
-from api.api_v1.demo_auth import router as demo_auth_router
-from api.api_v1.demo_auth.test_cookies import router as cookie_router
+from api.api_v1.auth import router as demo_auth_router
+from api.api_v1.auth.test_cookies import router as cookie_router
 
 router = APIRouter(
     prefix=settings.api.v1.prefix,
