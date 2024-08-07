@@ -1,0 +1,9 @@
+alembic==1.13.2
+asyncpg==0.29.0
+fastapi==0.111.0
+fastapi-users==13.0.0
+pydantic-settings==2.3.4
+sqlalchemy==2.0.31
+uvicorn==0.30.1
+pydantic
+aiobotocore==2.13.1
