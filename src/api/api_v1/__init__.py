@@ -1,11 +1,12 @@
 from fastapi import APIRouter
 
-from .auth_fastapi_users.schemas import UserRead, UserCreate, UserUpdate
-from .films import router as films_router
-from core.config import settings
-from api.api_v1.auth.auth import router as demo_auth_router
+# from api.api_v1.auth.auth import router as demo_auth_router
 from api.api_v1.auth.test_cookies import router as cookie_router
-from api.api_v1.auth_fastapi_users.router import fastapi_users, auth_backend
+from api.api_v1.auth_fastapi_users.router import auth_backend, fastapi_users
+from core.config import settings
+
+from .auth_fastapi_users.schemas import UserCreate, UserRead, UserUpdate
+from .films import router as films_router
 
 router = APIRouter(
     prefix=settings.api.v1.prefix,
@@ -54,4 +55,3 @@ router.include_router(
     prefix="/users",
     tags=["users"],
 )
-

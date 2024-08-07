@@ -3,9 +3,9 @@ import uuid
 from fastapi import APIRouter
 from fastapi_users import FastAPIUsers
 from fastapi_users.authentication import (
+    AuthenticationBackend,
     BearerTransport,
     JWTStrategy,
-    AuthenticationBackend,
 )
 
 from api.api_v1.auth_fastapi_users.user_manager import get_user_manager

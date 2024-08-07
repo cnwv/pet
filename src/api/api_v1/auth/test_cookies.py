@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Response, Cookie, HTTPException, status, Request
+from fastapi import APIRouter, Cookie, HTTPException, Request, Response, status
 from fastapi.responses import JSONResponse
 
 router = APIRouter(tags=["demo_cookie"])

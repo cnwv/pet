@@ -1,6 +1,7 @@
-from core.schemas.user import UserSchema
-from core.config import settings
 from datetime import timedelta
+
+from core.config import settings
+from core.schemas.user import UserSchema
 from utils import jwt_utils
 
 TOKEN_TYPE_FIELD = "type"

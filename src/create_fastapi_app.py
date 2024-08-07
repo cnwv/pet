@@ -1,13 +1,12 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from fastapi.responses import ORJSONResponse
 from fastapi.openapi.docs import (
     get_redoc_html,
     get_swagger_ui_html,
     get_swagger_ui_oauth2_redirect_html,
 )
-from starlette.responses import PlainTextResponse
+from fastapi.responses import ORJSONResponse
 
 from core.models import db_helper
 
@@ -45,7 +44,7 @@ def register_static_docs_routes(app: FastAPI):
 
 
 def create_app(
-        create_custom_static_urls: bool = False,
+    create_custom_static_urls: bool = False,
 ) -> FastAPI:
     app = FastAPI(
         default_response_class=ORJSONResponse,

@@ -5,4 +5,3 @@ from .base import Base
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
     pass
-

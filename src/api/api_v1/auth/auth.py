@@ -1,21 +1,13 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, status
-from fastapi.security import (
-    HTTPBearer,
-)
+from fastapi.security import HTTPBearer
 from pydantic import BaseModel
-from api.api_v1.auth.helpers import (
-    REFRESH_TOKEN_TYPE,
-    ACCESS_TOKEN_TYPE,
-    TOKEN_TYPE_FIELD,
-    create_refresh_token,
-    create_access_token,
-)
+
+from api.api_v1.auth.db import users_db
+from api.api_v1.auth.helpers import create_access_token, create_refresh_token
 from api.api_v1.auth.validation import (
-    get_current_auth_user,
-    get_current_auth_user_for_refresh,
     get_current_active_auth_user,
+    get_current_auth_user_for_refresh,
 )
-from api.api_v1.auth.db import admin, users_db
 from core.schemas.user import UserSchema
 from utils import jwt_utils
 
@@ -68,7 +60,9 @@ def auth_user_check_self_info(
 
 
 @router.get("/refresh", response_model=TokenInfo, response_model_exclude_none=True)
-def auth_refresh_jwt(user: UserSchema = Depends(get_current_auth_user_for_refresh)):
+def auth_refresh_jwt(
+    user: UserSchema = Depends(get_current_auth_user_for_refresh),
+):
     access_token = create_access_token(user)
     refresh_token = create_refresh_token(user)
     return TokenInfo(access_token=access_token, refresh_token=refresh_token)

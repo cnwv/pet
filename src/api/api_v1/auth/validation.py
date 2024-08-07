@@ -1,14 +1,13 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt import InvalidTokenError
-from starlette import status
 
+from api.api_v1.auth.db import users_db
 from api.api_v1.auth.helpers import (
-    TOKEN_TYPE_FIELD,
     ACCESS_TOKEN_TYPE,
     REFRESH_TOKEN_TYPE,
+    TOKEN_TYPE_FIELD,
 )
-from api.api_v1.auth.db import users_db
 from core.schemas.user import UserSchema
 from utils import jwt_utils
 
@@ -41,19 +40,20 @@ def validate_token_type(payload: dict, token_type: str) -> bool:
 
 def get_user_by_token_sub(payload: dict) -> UserSchema:
     username: str | None = payload.get("sub")
-    if users := users_db.get(username):
+    if users := users_db.get(username):  # type: ignore
         return users
     raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token(user not found)"
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid token(user not found)",
     )
 
 
 class UserGetterFromToken:
-    def __init__(self, token_type: dict):
+    def __init__(self, token_type: str):
         self.token_type = token_type
 
     def __call__(self, payload: dict = Depends(get_current_token_payload)):
-        validate_token_type(payload, self.token_type)
+        validate_token_type(payload=payload, token_type=self.token_type)
         return get_user_by_token_sub(payload)
 
 

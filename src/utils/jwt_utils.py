@@ -1,14 +1,14 @@
-from datetime import timedelta, datetime, UTC
+from datetime import UTC, datetime, timedelta
 
-
-import jwt
 import bcrypt
+import jwt
+
 from core.config import settings
 
 
 def encode_jwt(
     payload: dict,
-    private_key: str = settings.auth_jwt.private_key_path.read_text(),
+    private_key: str = settings.auth_jwt.private_key_path.read_text(),  # type: ignore
     algorithm: str = settings.auth_jwt.algorithm,
     expire_timedelta: timedelta | None = None,
     expire_minutes: int = settings.auth_jwt.access_token_expire_minutes,

@@ -1,8 +1,7 @@
 import uvicorn
 
-from core.config import settings
-
 from api import router as api_router
+from core.config import settings
 from create_fastapi_app import create_app
 
 main_app = create_app(
@@ -21,4 +20,3 @@ if __name__ == "__main__":
         reload=True,
     )
 # uvicorn main:main_app --host 127.0.0.1 --port 8000
-

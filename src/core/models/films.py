@@ -1,8 +1,7 @@
 from typing import List
 
-from sqlalchemy import ForeignKey, DECIMAL, Table, Column
-from sqlalchemy.orm import Mapped, relationship
-from sqlalchemy.orm import mapped_column
+from sqlalchemy import DECIMAL, Column, ForeignKey, Table
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
 from .mixins.int_id_pk import IntIdPkMixin
@@ -16,7 +15,7 @@ association_table = Table(
 
 
 class Category(IntIdPkMixin, Base):
-    __tablename__ = "categories"
+    __tablename__ = "categories"  # type: ignore
     name: Mapped[str] = mapped_column(unique=True)
     film: Mapped[List["Film"]] = relationship(
         secondary=association_table, back_populates="category"
@@ -30,6 +29,20 @@ class Film(IntIdPkMixin, Base):
     rating: Mapped[float] = mapped_column(DECIMAL(2, 1))
     file_path: Mapped[str] = mapped_column()
     picture_path: Mapped[str] = mapped_column()
+    category: Mapped[List[Category]] = relationship(
+        secondary=association_table, back_populates="film"
+    )
+    is_tvshow: Mapped[bool] = mapped_column()
+
+
+class Episode(IntIdPkMixin, Base):
+    title: Mapped[str] = mapped_column()
+    season: Mapped[int] = mapped_column()
+    episode: Mapped[int] = mapped_column()
+    file_path: Mapped[str] = mapped_column()
+    picture_path: Mapped[str] = mapped_column()
+    film_id: Mapped[int] = mapped_column(ForeignKey("films.id"))
+    film: Mapped[Film] = relationship("Film")
     category: Mapped[List[Category]] = relationship(
         secondary=association_table, back_populates="film"
     )
