@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import DECIMAL, Column, ForeignKey, Table
+from sqlalchemy import DECIMAL, JSON, Column, ForeignKey, Table
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -33,6 +33,7 @@ class Film(IntIdPkMixin, Base):
         secondary=association_table, back_populates="film"
     )
     is_tvshow: Mapped[bool] = mapped_column()
+    json_data: Mapped[dict] = mapped_column(JSON(), nullable=True)
 
 
 class Episode(IntIdPkMixin, Base):
